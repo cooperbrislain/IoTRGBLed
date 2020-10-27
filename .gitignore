@@ -1,3 +1,7 @@
 .DS_Store
-.secret
-/data/.secret
+.idea/.gitignore
+.idea/misc.xml
+cmake-build-debug/
+data/
+data/.secret
+secret.h
