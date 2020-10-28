@@ -1,3 +1,6 @@
+#ifndef IOTRGBLED_H
+#define IOTRGBLED_H
+
 #include <Arduino.h>
 #include <string>
 #include <iostream>
@@ -7,6 +10,9 @@
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
 #include <StreamPrint.h>
+
+#include <Action.h>
+#include <Light.h>
 
 #include "config.h"
 
@@ -18,3 +24,5 @@ struct Config {
 
 void mqtt_callback(char* topic, byte* message, unsigned int length);
 void reconnect();
+
+#endif // IOTRGBLED

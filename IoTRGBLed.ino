@@ -8,6 +8,15 @@ const char* wifi_ssid = WIFI_SSID;
 const char* wifi_pass = WIFI_PASS;
 const char* mqtt_host = MQTT_HOST;
 
+Config          config;
+CRGB*           leds;
+Light**         lights;
+std::map<String, Action*> actions;
+std::map<String, Light::State*> states;
+std::map<String, Light*> lightMap;
+
+int count = 0;
+
 void setup() {
     Serial.begin(115200);
 

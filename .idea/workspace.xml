@@ -28,9 +28,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f73e8265-fca1-4b35-b0d5-6b96e580580a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/IoTRGBLed.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/IoTRGBLed.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IoTRGBLed.h" beforeDir="false" afterPath="$PROJECT_DIR$/IoTRGBLed.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IoTRGBLed.ino" beforeDir="false" afterPath="$PROJECT_DIR$/IoTRGBLed.ino" afterDir="false" />
@@ -60,6 +57,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/secret.h" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -67,6 +65,13 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -78,7 +83,11 @@
       <updated>1603727543441</updated>
       <workItem from="1603727544603" duration="1061000" />
       <workItem from="1603759569712" duration="8000" />
-      <workItem from="1603761183987" duration="707000" />
+      <workItem from="1603761183987" duration="780000" />
+      <workItem from="1603762151246" duration="1934000" />
+      <workItem from="1603824917009" duration="32000" />
+      <workItem from="1603824960950" duration="598000" />
+      <workItem from="1603828981738" duration="1914000" />
     </task>
     <servers />
   </component>
