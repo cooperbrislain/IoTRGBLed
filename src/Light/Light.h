@@ -18,25 +18,23 @@ public:
     struct State {
         String  name;
         int*    params = nullptr;
-        String  color = "";
-        String  program = "";
-        int     onoff = -1;
-        int     count = -1;
+        String  color  = "";
+        String  prog   = "";
+        int     onoff  = -1;
+        int     count  = -1;
+        int     index  = -1;
     };
 
 private:
 
-    CRGB** _leds;
-    State _state;
-    CRGB _color;
-    int _params [NUM_PARAMS];
-    int _num_leds;
-    int _offset;
-    int _last_brightness;
-    bool _onoff;
-    String _name;
-    unsigned int _count;
-    unsigned int _index;
+    String      _name;
+    CRGB**      _leds;
+    State       _state;
+    int         _num_leds;
+    int         _offset;
+
+    int (Light::*_prog)(int x);
+
     int _prog_solid(int x);
     int _prog_chase(int x);
     int _prog_blink(int x);
@@ -47,28 +45,17 @@ private:
     int _prog_fadeout(int x);
     int _prog_fadein(int x);
     int _prog_longfade(int x);
-    int (Light::*_prog)(int x);
 
 public:
 
     Light() :
-        _color      { CRGB::White },
-        _onoff      { 0 },
-        _num_leds   { 0 },
-        _name       { "light" },
-        _prog       { &Light::_prog_solid },
-        _count      { 0 },
-        _params     { 1, 0, 0, 0 }
+        _name       { "light" }
+        _num_leds   { 0 }
     { };
     Light(String name, CRGB* leds, int offset, int num_leds, int reverse=0) :
         _name       { name },
-        _num_leds   { num_leds },
-        _color      { CRGB::White },
-        _onoff      { 0 },
-        _count      { 0 },
-        _offset     { offset },
-        _prog       { &Light::_prog_solid },
-        _params     { 1, 0, 0, 0 }
+        _num_leds   { num_leds }
+        _offset     { offset }
     {
         _leds = new CRGB*[num_leds];
         for (int i=0; i<num_leds; i++) {
@@ -77,13 +64,8 @@ public:
     };
     Light(String name, CRGB** leds) :
         _name       { name },
-        _color      { CRGB::White },
-        _count      { 0 },
-        _offset     { 0 },
-        _onoff      { 0 },
         _num_leds   { sizeof(leds) },
-        _prog       { &Light::_prog_solid },
-        _params     { 1, 0, 0, 0 }
+        _offset     { 0 }
     {
         _leds = new CRGB*[_num_leds];
         for (int i=0; i<sizeof(leds); i++) {
@@ -92,12 +74,7 @@ public:
     };
     Light(CRGB* leds, JsonObject jsonLight) :
         _name       { jsonLight["name"].as<String>() },
-        _onoff      { 0 },
-        _offset     { 0 },
-        _count      { 0 },
-        _color      { CRGB::White },
-        _prog       { &Light::_prog_solid },
-        _params     { 1, 0, 0, 0 }
+        _offset     { 0 }
     {
         if (jsonLight["leds"]) {
             JsonArray jsonLeds = jsonLight["leds"];
@@ -150,6 +127,7 @@ public:
     int  getParam(int p);
     CRGB getRgb();
     CHSV getHsv();
+
     void update();
 
 };
