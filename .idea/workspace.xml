@@ -28,12 +28,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f73e8265-fca1-4b35-b0d5-6b96e580580a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Action/Action.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Action/Action.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Light/Light.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Light/Light.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IoTRGBLed.h" beforeDir="false" afterPath="$PROJECT_DIR$/IoTRGBLed.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IoTRGBLed.ino" beforeDir="false" afterPath="$PROJECT_DIR$/IoTRGBLed.ino" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -92,7 +87,7 @@
       <workItem from="1603824917009" duration="32000" />
       <workItem from="1603824960950" duration="598000" />
       <workItem from="1603828981738" duration="2146000" />
-      <workItem from="1604026724868" duration="7061000" />
+      <workItem from="1604026724868" duration="7162000" />
     </task>
     <servers />
   </component>

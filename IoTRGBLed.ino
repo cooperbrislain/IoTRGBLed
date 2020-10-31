@@ -59,7 +59,7 @@ void setup() {
     Serial.println("Starting Lights...");
 }
 
-void main() {
+void loop() {
     if (!client.connected()) {
         reconnect();
     }
