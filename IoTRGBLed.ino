@@ -11,7 +11,6 @@ Config      config;
 CRGB*      leds;
 Light**    lights;
 
-std::map<String, Action*>       actions;
 std::map<String, Light::State*> states;
 std::map<String, Light*>        lightMap;
 
@@ -34,12 +33,6 @@ void setup() {
     config.name         = jsonDoc["name"].as<String>() || "Unnamed Project";
     config.wifi_ssid    = jsonDoc["wifi_ssid"].as<String>();
     config.wifi_pass    = jsonDoc["wifi_pass"].as<String>();
-
-    pinMode(LED_PIN, OUTPUT);
-    pinMode(SENSOR_PIN, INPUT);
-
-    adc1_config_width(ADC_WIDTH_12Bit);
-    adc1_config_channel_atten(ADC1_GPIO32_CHANNEL, ADC_ATTEN_DB_0);
 
     Serial.print("Connecting to ");
     Serial.println(wifi_ssid);

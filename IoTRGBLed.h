@@ -14,7 +14,6 @@
 
 #include <StreamPrint.h>
 
-#include "src/Action/Action.h"
 #include "src/Light/Light.h"
 
 #include "config.h"
@@ -37,6 +36,5 @@ void mqtt_callback(char* topic, byte* message, unsigned int length);
 void reconnect();
 
 Light::State* stateFromJson(JsonObject jsonState);
-Action* actionFromJson(JsonObject jsonAction);
 
 #endif // IOTRGBLED
