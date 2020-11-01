@@ -19,6 +19,7 @@ public:
         String  name;
         int*    params = nullptr;
         CRGB    color  = CRGB::White;
+        String  prog;
         int     onoff  = -1;
         int     count  = -1;
         int     index  = -1;

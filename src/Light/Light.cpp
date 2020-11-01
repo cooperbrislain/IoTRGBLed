@@ -79,17 +79,16 @@ void Light::setState(State* state) {
             Serial << (state->onoff==1? "On" : "Off") << "|";
             turn(state->onoff);
         }
-        if (state->program != "") {
-            Serial << "Prog:" << state->program << "|";
-            setProgram(state->program);
+        if (state->prog != "") {
+            Serial << "Prog:" << state->prog << "|";
+            setProgram(state->prog);
         }
         if (state->params != nullptr) {
             Serial << "Params...|";
             setParams(state->params);
         }
-        if (state->color != "") {
-            Serial << "Color:" << state->color;
-            setColor(state->color);
+        if (state->color) {
+            _state.color = state->color;
         }
         if (state->count != -1) {
             _state.count = state->count;
@@ -144,14 +143,14 @@ int Light::_prog_fadeout(int x) {
         _leds[i]->fadeToBlackBy(x);
         if (*_leds[i]) still_fading = true;
     }
-    if (!still_fading) _onoff = false;
+    if (!still_fading) _state.onoff = false;
     return 0;
 }
 
 int Light::_prog_chase(int x) {
     // params: 0: Chase Speed
     //         1: Fade Speed
-    _prog_fade(_params[1]);
+    _prog_fade(_state.params[1]);
     *_leds[_state.count%_num_leds] = _state.color;
     return 0;
 }
