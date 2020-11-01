@@ -130,8 +130,8 @@ int Light::_prog_fade(int x) {
 int Light::_prog_fadein(int x) {
     bool still_fading = false;
     for(int i=0; i<_num_leds; i++) {
-        *_leds[i] = fadeTowardColor(*_leds[i], _color, x);
-        if (*_leds[i] != _color) still_fading = true;
+        *_leds[i] = fadeTowardColor(*_leds[i], _state.color, x);
+        if (*_leds[i] != _state.color) still_fading = true;
     }
     if (!still_fading) _prog = &Light::_prog_solid;
     return 0;
