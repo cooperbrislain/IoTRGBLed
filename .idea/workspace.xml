@@ -29,6 +29,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f73e8265-fca1-4b35-b0d5-6b96e580580a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Light/Light.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Light/Light.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Light/Light.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Light/Light.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,7 +88,7 @@
       <workItem from="1603824917009" duration="32000" />
       <workItem from="1603824960950" duration="598000" />
       <workItem from="1603828981738" duration="2146000" />
-      <workItem from="1604026724868" duration="7970000" />
+      <workItem from="1604026724868" duration="10567000" />
     </task>
     <servers />
   </component>
@@ -118,5 +119,9 @@
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state x="210" y="172" key="SettingsEditor/1440.-493.768.1341/-480.-1055.1920.1055/0.25.1440.875@0.25.1440.875" timestamp="1604074707684" />
+    <state x="419" y="174" width="595" height="580" key="find.popup" timestamp="1604202651796">
+      <screen x="0" y="25" width="1440" height="875" />
+    </state>
+    <state x="419" y="174" width="595" height="580" key="find.popup/1440.-493.768.1341/-480.-1055.1920.1055/0.25.1440.875@0.25.1440.875" timestamp="1604202651796" />
   </component>
 </project>

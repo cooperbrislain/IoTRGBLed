@@ -18,8 +18,7 @@ public:
     struct State {
         String  name;
         int*    params = nullptr;
-        String  color  = "";
-        String  prog   = "";
+        CRGB    color  = CRGB::White;
         int     onoff  = -1;
         int     count  = -1;
         int     index  = -1;
@@ -49,12 +48,12 @@ private:
 public:
 
     Light() :
-        _name       { "light" }
+        _name       { "light" },
         _num_leds   { 0 }
     { };
     Light(String name, CRGB* leds, int offset, int num_leds, int reverse=0) :
         _name       { name },
-        _num_leds   { num_leds }
+        _num_leds   { num_leds },
         _offset     { offset }
     {
         _leds = new CRGB*[num_leds];
@@ -99,13 +98,13 @@ public:
         }
         if (jsonLight["program"])   setProgram(jsonLight["program"]);
         if (jsonLight["color"])     setColor(jsonLight["color"]);
-        if (jsonLight["params"]) {
-            JsonArray jsonParams = jsonLight["params"];
-            int numParams = jsonParams.size();
-            for (int i=0; i<numParams; i++) {
-                _params[i] = jsonParams[i].as<int>();
-            }
-        }
+//        if (jsonLight["params"]) {
+//            JsonArray jsonParams = jsonLight["params"];
+//            int numParams = jsonParams.size();
+//            for (int i=0; i<numParams; i++) {
+//                params[i] = jsonParams[i].as<int>();
+//            }
+//        }
     };
     String getName();
     void turnOn();

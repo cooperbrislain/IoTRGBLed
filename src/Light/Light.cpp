@@ -1,32 +1,32 @@
 #include "Light.h"
 
 void Light::update() {
-    (this->*_prog)(_params[1]);
-    _count++;
+    (this->*_prog)(_state.params[1]);
+    _state.count++;
 }
 
-CHSV Light::getHsv() { return rgb2hsv_approximate(_color); }
-CRGB Light::getRgb() { return _color; }
-int  Light::getParam(int p) { return _params[p]; }
+CHSV Light::getHsv() { return rgb2hsv_approximate(_state.color); }
+CRGB Light::getRgb() { return _state.color; }
+int  Light::getParam(int p) { return _state.params[p]; }
 String Light::getName() { return _name; }
 
-void Light::turnOn() { _onoff = 1; }
-void Light::turnOff() { _onoff = 0; }
-void Light::turn(int onoff) { _onoff = onoff; }
-void Light::toggle() { _onoff = (_onoff==1? 0 : 1); }
+void Light::turnOn() { _state.onoff = 1; }
+void Light::turnOff() { _state.onoff = 0; }
+void Light::turn(int onoff) { _state.onoff = onoff; }
+void Light::toggle() { _state.onoff = (_state.onoff==1? 0 : 1); }
 
-void Light::setRgb(CRGB color) { _color = color; }
-void Light::setHsv(int hue, int sat, int val) { _color = CHSV(hue, sat, val); }
-void Light::setHsv(CHSV color) { _color = color; }
+void Light::setRgb(CRGB color) { _state.color = color; }
+void Light::setHsv(int hue, int sat, int val) { _state.color = CHSV(hue, sat, val); }
+void Light::setHsv(CHSV color) { _state.color = color; }
 
 void Light::setColor(String color) {
     // TODO: make this a mapping or look to see if there's a function in FastLED
-    if (color == "red")     _color = CRGB::Red;
-    if (color == "orange")  _color = CRGB::Orange;
-    if (color == "blue")    _color = CRGB::Blue;
-    if (color == "green")   _color = CRGB::Green;
-    if (color == "black")   _color = CRGB::Black;
-    if (color == "white")   _color = CRGB::White;
+    if (color == "red")     _state.color = CRGB::Red;
+    if (color == "orange")  _state.color = CRGB::Orange;
+    if (color == "blue")    _state.color = CRGB::Blue;
+    if (color == "green")   _state.color = CRGB::Green;
+    if (color == "black")   _state.color = CRGB::Black;
+    if (color == "white")   _state.color = CRGB::White;
 }
 
 void Light::setHue(int val) {
@@ -51,25 +51,25 @@ void Light::setProgram(String progName) {
     if (progName == "solid") _prog = &Light::_prog_solid;
     if (progName == "chase") {
         _prog = &Light::_prog_chase;
-        _params[1] = _params[1]? _params[1] : 35;
+        _state.params[1] = _state.params[1]? _state.params[1] : 35;
     }
     if (progName == "fade")  _prog = &Light::_prog_fade;
     if (progName == "blink") _prog = &Light::_prog_blink;
     if (progName == "warm") {
         _prog = &Light::_prog_warm;
-        _params[0] = 50;
+        _state.params[0] = 50;
     }
     if (progName == "lfo") _prog = &Light::_prog_lfo;
 }
 
 void Light::setParams(int* params) {
     for (int i=0; i<sizeof(params); i++) {
-        _params[i] = params[i];
+        _state.params[i] = params[i];
     }
 }
 
 void Light::setParam(int p, int v) {
-    _params[p] = v;
+    _state.params[p] = v;
 }
 
 void Light::setState(State* state) {
@@ -92,7 +92,7 @@ void Light::setState(State* state) {
             setColor(state->color);
         }
         if (state->count != -1) {
-            _count = state->count;
+            _state.count = state->count;
         }
         Serial << "]\n";
     } catch (int e) {
@@ -116,7 +116,7 @@ void Light::blink() {
 
 int Light::_prog_solid(int x) {
     for (int i=0; i<_num_leds; i++) {
-        *_leds[i] = _color;
+        *_leds[i] = _state.color;
     }
     return 0;
 }
@@ -152,43 +152,43 @@ int Light::_prog_chase(int x) {
     // params: 0: Chase Speed
     //         1: Fade Speed
     _prog_fade(_params[1]);
-    *_leds[_count%_num_leds] = _color;
+    *_leds[_state.count%_num_leds] = _state.color;
     return 0;
 }
 
 int Light::_prog_warm(int x) {
-    if (_count%7 == 0) _prog_fade(10);
+    if (_state.count%7 == 0) _prog_fade(10);
 
-    if (_count%11 == 0) {
-        _index = random(_num_leds);
-        CHSV wc = rgb2hsv_approximate(_color);
+    if (_state.count%11 == 0) {
+        _state.index = random(_num_leds);
+        CHSV wc = rgb2hsv_approximate(_state.color);
         wc.h = wc.h + random(11)-5;
         wc.s = random(128)+128;
         wc.v &=x;
-        _color = wc;
+        _state.color = wc;
     }
-    *_leds[_index] += _color;
+    *_leds[_state.index] += _state.color;
     return 0;
 }
 
 int Light::_prog_xmas(int x) {
-    if (_count%7 == 0) _prog_fade(1);
+    if (_state.count%7 == 0) _prog_fade(1);
 
-    if (_count%11 == 0) {
-        _index = random(_num_leds);
-        CHSV wc = rgb2hsv_approximate(_color);
+    if (_state.count%11 == 0) {
+        _state.index = random(_num_leds);
+        CHSV wc = rgb2hsv_approximate(_state.color);
         wc.h = wc.h + random(11)-5;
         wc.s = random(128)+128;
         wc.v &=x;
-        _color = wc;
+        _state.color = wc;
     }
-    *_leds[_index] += _color;
+    *_leds[_state.index] += _state.color;
     return 0;
 }
 
 int Light::_prog_lfo(int x) {
-    int wc = _color;
-    wc%=(int)round((sin(_count*3.14/180)+0.5)*255);
+    int wc = _state.color;
+    wc%=(int)round((sin(_state.count*3.14/180)+0.5)*255);
     for(int i=0; i<_num_leds; i++) {
         *_leds[i] = wc;
     }
@@ -197,12 +197,12 @@ int Light::_prog_lfo(int x) {
 
 int Light::_prog_longfade(int x) {
     bool still_fading = false;
-    if(_count%10 == 0) {
+    if(_state.count%10 == 0) {
         for(int i=0; i<_num_leds; i++) {
             _leds[i]->fadeToBlackBy(1);
             if (*_leds[i]) still_fading = true;
         }
-        if (!still_fading) _onoff = false;
+        if (!still_fading) _state.onoff = false;
     }
     return 0;
 }
@@ -210,9 +210,9 @@ int Light::_prog_longfade(int x) {
 int Light::_prog_blink(int x) {
     _prog_fade(25);
     if (!x) x = 25;
-    if (_count%x == 0) {
+    if (_state.count%x == 0) {
         for(int i=0; i<_num_leds; i++) {
-            *_leds[i] = _color;
+            *_leds[i] = _state.color;
         }
     }
     return 0;
