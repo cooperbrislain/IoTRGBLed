@@ -43,8 +43,7 @@ void setup() {
         Serial.print(".");
     }
 
-    Serial.println("WiFi connected with IP: ");
-    Serial.println(WiFi.localIP());
+    Serial << "WiFi connected with IP: " << WiFi.localIP() << "\n";
 
     client.setServer(mqtt_host, 1883);
     client.setCallback(mqtt_callback);
@@ -58,7 +57,16 @@ void loop() {
     }
     client.loop();
 
-    delay(5000);
+    for (int i=0; i<config.num_lights; i++) {
+        if (count % lights[i]->getParam(0) == 0) {
+            lights[i]->update();
+        }
+    }
+
+    FastLED.show();
+
+    count++;
+    delay(1000/config.speed);
 }
 
 void mqtt_callback(char* topic, byte* message, unsigned int length) {
